@@ -32,11 +32,7 @@ Aids in packaging multi step code and sharing with others to reproduce
 mlflow run
 
 ```bash
-mlflow run git@github.com:atanikan/mlflow-tutorial.git
+mlflow run git@github.com:atanikan/mlflow-tutorial.git --env-manager=local
 ```
 
 ## MLflow Models
-
-
-
-
