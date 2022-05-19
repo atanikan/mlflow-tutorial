@@ -20,9 +20,9 @@ import logging
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
 
-mlflow.set_experiment("wine_quality_linear_regression_2") # set experiment name
-mlflow.set_tracking_uri("http://127.0.0.1:8080") # set tracking server information
-mlflow.autolog() # automatically logs metrics 
+# mlflow.set_experiment("wine_quality_linear_regression_2") # set experiment name
+# mlflow.set_tracking_uri("http://127.0.0.1:8080") # set tracking server information
+# mlflow.autolog() # automatically logs metrics 
 
     
 def eval_metrics(actual, pred):
@@ -36,6 +36,13 @@ def train(in_alpha = None, in_l1_ratio = None):
     #mlflow.set_tracking_uri("http://127.0.0.1:8080") # set tracking server information
 
     # Read the wine-quality csv file
+    #     csv_url ='http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
+    #     try:
+    #         data = pd.read_csv(csv_url, sep=';')
+    #     except Exception as e:
+    #         logger.exception(
+    #             "Unable to download training & test CSV, check your internet connection. Error: %s", e)
+
     data = pd.read_csv('winequality-red.csv', sep=";")
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
@@ -73,16 +80,15 @@ def train(in_alpha = None, in_l1_ratio = None):
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
-        #tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        # #tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         
-        signature = infer_signature(train_x, lr.predict(test_x))
-        mlflow.sklearn.log_model(
-            sk_model=lr,
-            artifact_path="sklearn-model",
-            registered_model_name="sk-learn-random-forest-reg-model",
-            signature=signature
-        )
+        # signature = infer_signature(train_x, lr.predict(test_x))
+        # mlflow.sklearn.log_model(
+        #     sk_model=lr,
+        #     artifact_path="sklearn-model",
+        #     registered_model_name="sk-learn-random-forest-reg-model",
+        #     signature=signature
+        # )
 
 if __name__ == "__main__":
-    print("here")
     train(sys.argv[1],sys.argv[2])

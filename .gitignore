@@ -2,3 +2,4 @@
 *.sif
 mlruns
 artifacts
+.ipynb*

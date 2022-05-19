@@ -3,9 +3,14 @@
 Presentation can be found here: https://docs.google.com/presentation/d/1NOuwkOMBxKz_CePfYCeVZ2zhq-MDPcQqCOKGzf9N06E/edit?usp=sharing
 
 ## Tracking server
+
+To setup a tracking server we are using the architecture defined in this image via a singularity container, only difference is we use a database as the filestore
+
+![Drag Racing](scenario_3.png)
+
 To run a tracking server which also provides a database, you can use the docker container provided [here](https://hub.docker.com/r/atcommons/mlflow-server)  
 
-To build & run the singularity container on Theta GPU computes or Theta is given below
+To build & run a singularity container using the docker image mentioned [here](https://hub.docker.com/r/atcommons/mlflow-server) on Theta GPU computes or Theta please refer to the code below
 
 ```bash
 singularity build mlflow-server.sif docker://atcommons/mlflow-server
@@ -16,7 +21,7 @@ To access the server use port forwarding
 
 ```bash
 ssh -L 8080:127.0.0.1:8080 <username>@theta.alcf.anl.gov
-
+ssh -L 8080:127.0.0.1:8080 thetagpu16 
 ```
 
 
@@ -27,7 +32,7 @@ Aids in packaging multi step code and sharing with others to reproduce
 mlflow run
 
 ```bash
-mlflow run https://github.com/atanikan/mlflow-tutorial
+mlflow run git@github.com:atanikan/mlflow-tutorial.git
 ```
 
 ## MLflow Models
