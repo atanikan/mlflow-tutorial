@@ -6,7 +6,7 @@ Presentation can be found here: https://docs.google.com/presentation/d/1NOuwkOMB
 
 To setup a tracking server we are using the architecture defined in this image via a singularity container, only difference is we use a database as the filestore
 
-![Drag Racing](scenario_3.png)
+![Tracking Server](scenario_3.png)
 
 To run a tracking server which also provides a database, you can use the docker container provided [here](https://hub.docker.com/r/atcommons/mlflow-server)  
 
@@ -24,8 +24,6 @@ ssh -L 8080:127.0.0.1:8080 <username>@theta.alcf.anl.gov
 ssh -L 8080:127.0.0.1:8080 thetagpu16 
 ```
 
-
-
 ## MLflow Project
 
 Aids in packaging multi step code and sharing with others to reproduce
@@ -36,3 +34,7 @@ mlflow run git@github.com:atanikan/mlflow-tutorial.git --env-manager=local
 ```
 
 ## MLflow Models
+
+To save and server the model as a API
+
+![model](mlflow_model.png)
