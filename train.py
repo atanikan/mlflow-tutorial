@@ -43,7 +43,8 @@ def train(in_alpha = None, in_l1_ratio = None):
     #         logger.exception(
     #             "Unable to download training & test CSV, check your internet connection. Error: %s", e)
 
-    data = pd.read_csv('winequality-red.csv', sep=";")
+    wine_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wine-quality.csv")
+    data = pd.read_csv(wine_path)    
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
 
@@ -80,6 +81,7 @@ def train(in_alpha = None, in_l1_ratio = None):
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
+        mlflow.sklearn.log_model(lr, "model")
         # #tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         
         # signature = infer_signature(train_x, lr.predict(test_x))
@@ -91,4 +93,6 @@ def train(in_alpha = None, in_l1_ratio = None):
         # )
 
 if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
+    np.random.seed(40)
     train(sys.argv[1],sys.argv[2])
