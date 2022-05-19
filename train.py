@@ -35,16 +35,16 @@ def train(in_alpha = None, in_l1_ratio = None):
     np.random.seed(40)
     #mlflow.set_tracking_uri("http://127.0.0.1:8080") # set tracking server information
 
-    # Read the wine-quality csv file
-    #     csv_url ='http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
-    #     try:
-    #         data = pd.read_csv(csv_url, sep=';')
-    #     except Exception as e:
-    #         logger.exception(
-    #             "Unable to download training & test CSV, check your internet connection. Error: %s", e)
+    #Read the wine-quality csv file
+    csv_url ='http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
+    try:
+        data = pd.read_csv(csv_url, sep=';')
+    except Exception as e:
+        logger.exception(
+            "Unable to download training & test CSV, check your internet connection. Error: %s", e)
 
-    wine_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wine-quality.csv")
-    data = pd.read_csv(wine_path)    
+    # wine_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wine-quality.csv")
+    # data = pd.read_csv(wine_path)    
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
 
